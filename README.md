@@ -11,4 +11,5 @@ The PowerPoint file is included in this repo as **Presentation Capstone.pptx**.
 2. Extract all files
 3. Open `index.html` in any web browser
 4. The Password Strength Checker + Quiz will start automatically
-
+             OR
+   Link to the file: https://bid2242.github.io/Capstone-Password-Security-Tool/
