@@ -1,15 +1,26 @@
-# Capstone Password Security Tool
+Capstone Password Security Tool
+🎥 Presentation Video
 
-## 📹 Presentation Video
-Watch the full project presentation here:  
+Watch the full project presentation here:
 👉 https://www.youtube.com/watch?v=LJYPybJ_ZHg
-## 📄 Presentation Slides
-The PowerPoint file is included in this repo as **Presentation Capstone.pptx**.
 
-## How to Run the Project
-1. Download the repository (Code → Download ZIP)
-2. Extract all files
-3. Open `index.html` in any web browser
-4. The Password Strength Checker + Quiz will start automatically
-             OR
-   Link to the file: https://bid2242.github.io/Capstone-Password-Security-Tool/
+📑 Presentation Slides
+
+The PowerPoint file is included in the repository as:
+Presentation Capstone.pptx
+
+🚀 How to Run the Project
+Option 1 — Run locally
+
+Download the repository (Code → Download ZIP)
+
+Extract all files
+
+Open index.html in any web browser
+
+The Password Strength Checker + Quiz will load automatically
+
+Option 2 — Run Online
+
+Use the hosted GitHub Pages version:
+https://bid2242.github.io/Capstone-Password-Security-Tool/
