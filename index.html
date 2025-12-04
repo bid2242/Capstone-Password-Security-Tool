@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Password Strength Checker & Security Quiz</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.0/dist/confetti.browser.min.js"></script>
+
+</head>
+<body>
+  <!-- THEME TOGGLE -->
+  <button id="toggleTheme" class="theme-toggle" type="button">☀ Light Mode</button>
+
+  <header class="app-header">
+    <h1>Password Strength Checker & Security Quiz</h1>
+    <p class="subtitle">
+      Real-time password analysis + interactive cybersecurity quiz with a gaming-inspired interface.
+    </p>
+  </header>
+
+  <main class="app-layout">
+    <!-- PASSWORD CARD -->
+    <section id="passwordSection" class="card" aria-labelledby="pwTitle">
+      <h2 id="pwTitle">Password Strength Checker</h2>
+      <p class="card-tag">Live feedback • Entropy • Generators • Breach check</p>
+
+      <label for="passwordInput" class="field-label">Enter a password to test</label>
+      <div class="pw-row">
+        <input
+          id="passwordInput"
+          type="password"
+          autocomplete="off"
+          placeholder="Type or generate a password..."
+          aria-describedby="strengthText entropyText"
+        />
+        <button id="toggleShow" type="button" class="btn-show">Show</button>
+      </div>
+
+      <!-- Generator + tools -->
+      <div class="pw-actions">
+        <button id="genWeak" type="button" class="btn-weak">Weak</button>
+        <button id="genStrong" type="button" class="btn-strong">Strong</button>
+        <button id="genPass" type="button" class="btn-pass">Passphrase</button>
+        <button id="copyPw" type="button" class="btn-copy">Copy</button>
+        <button id="checkBreach" type="button" class="btn-breach">Check Breach</button>
+      </div>
+
+      <!-- Strength + entropy -->
+      <div id="strengthWrap" class="strength-wrap" aria-live="polite" aria-atomic="true">
+        <div class="strength-header">
+          <p id="strengthText" class="strength-label">Strength: — (0/4)</p>
+        </div>
+        <div id="strengthBar" class="strength-bar" role="progressbar" aria-valuemin="0" aria-valuemax="4" aria-valuenow="0">
+          <div id="strengthFill" class="strength-fill"></div>
+        </div>
+        <p id="entropyText" class="entropy-text">Entropy: 0 bits (—)</p>
+      </div>
+
+      <!-- Requirements checklist -->
+      <div class="requirements" aria-label="Password requirements" id="requirementsList">
+        <div class="req-item" data-req="length">
+          <span class="req-indicator" aria-hidden="true"></span>
+          <span>At least 12 characters</span>
+        </div>
+        <div class="req-item" data-req="upper">
+          <span class="req-indicator" aria-hidden="true"></span>
+          <span>Contains uppercase letters (A–Z)</span>
+        </div>
+        <div class="req-item" data-req="lower">
+          <span class="req-indicator" aria-hidden="true"></span>
+          <span>Contains lowercase letters (a–z)</span>
+        </div>
+        <div class="req-item" data-req="number">
+          <span class="req-indicator" aria-hidden="true"></span>
+          <span>Contains numbers (0–9)</span>
+        </div>
+        <div class="req-item" data-req="symbol">
+          <span class="req-indicator" aria-hidden="true"></span>
+          <span>Contains symbols (!@#$...)</span>
+        </div>
+        <div class="req-item" data-req="common">
+          <span class="req-indicator" aria-hidden="true"></span>
+          <span>Not found in common passwords list</span>
+        </div>
+      </div>
+
+      <!-- Security summary dashboard -->
+      <section class="pw-dashboard" aria-label="Password security summary">
+        <div class="pw-dashboard-title">Security summary</div>
+        <div class="pw-dashboard-grid">
+          <div class="pw-dash-item">
+            <span>Strength</span>
+            <strong id="dashStrength">—</strong>
+          </div>
+          <div class="pw-dash-item">
+            <span>Entropy</span>
+            <strong id="dashEntropy">0 bits</strong>
+          </div>
+          <div class="pw-dash-item">
+            <span>Breach status</span>
+            <strong id="dashBreach">Not checked</strong>
+          </div>
+          <div class="pw-dash-item">
+            <span>Overall rating</span>
+            <strong id="dashOverall">—</strong>
+          </div>
+        </div>
+        <p id="breachStatus" class="breach-status" aria-live="polite"></p>
+      </section>
+
+      <ul id="feedbackList" class="feedback-list"></ul>
+
+      <p class="helper-text">
+        Tips: Use 12+ characters, avoid common words, and mix uppercase/lowercase letters, numbers, and symbols.
+      </p>
+    </section>
+
+    <!-- QUIZ CARD -->
+    <section id="quizSection" class="card" aria-labelledby="quizTitle">
+      <div class="quiz-header">
+        <div>
+          <h2 id="quizTitle">Cybersecurity Awareness Quiz</h2>
+          <p class="card-tag">5 questions • Instant feedback • Randomized</p>
+        </div>
+        <button id="toggleSound" type="button" class="pill-outline quiz-sound">
+          🔇 Sound Off
+        </button>
+      </div>
+
+      <!-- Quiz stats -->
+      <div id="quizStats" class="quiz-stats" aria-live="polite"></div>
+
+      <div id="quizContainer" class="quiz-container">
+        <p>
+          Test your skills with a quick 5-question quiz. Questions and answer
+          order are randomized each time.
+        </p>
+        <button id="startQuiz" class="btn-primary" type="button">Start Quiz</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    © 2025 Password Strength Checker & Security Quiz — Capstone Project by Group 3
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.4.2/zxcvbn.js"></script>
+  <script src="questions.js"></script>
+  <script src="script.js"></script>
+  <div id="badgePopup" class="badge-popup">
+  <div class="badge-content">
+    <h2>🏆 Cybersecurity Master!</h2>
+    <p>You achieved a perfect score of 5/5</p>
+    <button id="closeBadge" class="btn-primary">Awesome!</button>
+  </div>
+</div>
+
+</body>
+</html>
